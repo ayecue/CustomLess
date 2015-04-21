@@ -1,9 +1,15 @@
 <?php
 
-class CustomLess_Controller_Plugin_Parser extends Pimcore_Controller_Plugin_Less {
+namespace CustomLess\Controller\Plugin;
+
+use Pimcore\Controller\Plugin as PimcorePlugin;
+use Pimcore\Config as PimcoreConfig;
+use CustomLess\Tool\Helper as LessHelper;
+
+class Parser extends PimcorePlugin\Less {
 
     static public function getLessJSPath() {
-        return "/plugins/CustomLess/static/js/lib/less-1.7.5.min.js";
+        return "/plugins/CustomLess/static/js/lib/less.min.js";
     }
 
     static public function getScriptTag() {
@@ -17,27 +23,21 @@ class CustomLess_Controller_Plugin_Parser extends Pimcore_Controller_Plugin_Less
                 "\n";
     }
 
-    public function routeStartup(Zend_Controller_Request_Abstract $request) {
-
-        $this->conf = Pimcore_Config::getSystemConfig();
+    public function routeStartup(\Zend_Controller_Request_Abstract $request) {
+        $this->conf = PimcoreConfig::getSystemConfig();
 
         if($request->getParam('disable_less_compiler') || $_COOKIE["disable_less_compiler"]){
             return $this->disable();
         }
-
     }
 
     public function dispatchLoopShutdown() {
-
         parent::dispatchLoopShutdown();
-
     }
 
     protected function frontend () {
-
         $body = $this->getResponse()->getBody();
-
-        $body = CustomLess_Tool_Helper::processHtml($body);
+        $body = LessHelper::processHtml($body);
 
         $this->getResponse()->setBody($body);
     }

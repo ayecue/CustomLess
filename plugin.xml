@@ -4,10 +4,10 @@
         <pluginName>CustomLess</pluginName>
         <pluginDescription>Actual working Less.</pluginDescription>
         <pluginNiceName>CustomLess</pluginNiceName>
-        <pluginVersion>1.0.0</pluginVersion>
+        <pluginVersion>2.0.0</pluginVersion>
         <pluginRevision>1</pluginRevision>
         <pluginBuildTimestamp></pluginBuildTimestamp>
-        <pluginClassName>CustomLess_Plugin</pluginClassName>
+        <pluginClassName>\CustomLess\Plugin</pluginClassName>
         <pluginIncludePaths>
             <path>/CustomLess/lib</path>
         </pluginIncludePaths>

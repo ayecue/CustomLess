@@ -1,13 +1,18 @@
 <?php
 
-class CustomLess_Tool_Helper extends Pimcore_Tool_Less {
+namespace CustomLess\Tool;
+
+use Pimcore\Tool as PimcoreTool;
+use Pimcore\Config as PimcoreConfig;
+
+class Helper extends PimcoreTool\Less {
 	static public function getLessPHPPath() {
         return PIMCORE_PLUGINS_PATH . "/CustomLess/lib/Less/lessc.inc.php";
     }
 
 	public static function compile ($path, $source = null) {
 
-        $conf = Pimcore_Config::getWebsiteConfig();
+        $conf = PimcoreConfig::getWebsiteConfig();
         $compiledContent = "";
 
         // use the original less compiler if configured
@@ -25,7 +30,7 @@ class CustomLess_Tool_Helper extends Pimcore_Tool_Less {
         // use php implementation of lessc if it doesn't work
         if(empty($compiledContent)) {
             include_once(self::getLessPHPPath());
-            $less = new lessc();
+            $less = new \lessc();
             $less->importDir = dirname($path);
             $compiledContent = $less->parse(file_get_contents($path));
 

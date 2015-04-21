@@ -1,6 +1,12 @@
 <?php
 
-class CustomLess_Plugin extends CustomLess_Config {
+namespace CustomLess;
+
+use Pimcore\Tool as PimcoreTool;
+use CustomLess\Config as LessConfig;
+use CustomLess\Controller\Plugin\Parser as LessParser;
+
+class Plugin extends Config {
     const PLUGIN_STACK_INDEX = 1003;
 
 	public static function install() {
@@ -18,14 +24,13 @@ class CustomLess_Plugin extends CustomLess_Config {
 	}
 
 	public function preDispatch() {
-
 	 	// Pimcore CDN is not enabled by default in Pimcore.php                  
-		if(!isset($_SERVER['HTTP_SECURE']) && Pimcore_Tool::isFrontend()){
+		if(!isset($_SERVER['HTTP_SECURE']) && PimcoreTool::isFrontend()){
 			//die('Ende');
-			$less = new CustomLess_Controller_Plugin_Parser();
+			$less = new LessParser();
 
             // 805 means trigger this plugin later than other plugins (with lower numbers)
-			$instance = Zend_Controller_Front::getInstance();
+			$instance = \Zend_Controller_Front::getInstance();
 
 			$instance->registerPlugin($less,self::PLUGIN_STACK_INDEX);
 		}
