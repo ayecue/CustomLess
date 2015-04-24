@@ -37,7 +37,12 @@ class Parser extends PimcorePlugin\Less {
 
     protected function frontend () {
         $body = $this->getResponse()->getBody();
-        $body = LessHelper::processHtml($body);
+
+        try {
+            $body = LessHelper::processHtml($body);
+        } catch (\Exception $e) {
+             \Logger::error("LessHelper failed in page " . $this->getRequest()->document->id . ".");
+        }
 
         $this->getResponse()->setBody($body);
     }

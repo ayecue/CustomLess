@@ -4,7 +4,7 @@
         <pluginName>CustomLess</pluginName>
         <pluginDescription>Actual working Less.</pluginDescription>
         <pluginNiceName>CustomLess</pluginNiceName>
-        <pluginVersion>2.0.0</pluginVersion>
+        <pluginVersion>2.0.1</pluginVersion>
         <pluginRevision>1</pluginRevision>
         <pluginBuildTimestamp></pluginBuildTimestamp>
         <pluginClassName>CustomLess\Plugin</pluginClassName>
